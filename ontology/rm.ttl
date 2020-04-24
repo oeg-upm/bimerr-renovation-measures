@@ -1,0 +1,505 @@
+@prefix : <http://bimerr.iot.linkeddata.es/def/renovation-measures#> .
+@prefix dc: <http://purl.org/dc/elements/1.1> .
+@prefix rm: <http://bimerr.iot.linkeddata.es/def/renovation-measures#> .
+@prefix kpi: <http://bimerr.iot.linkeddata.es/def/key-performance-indicator#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix building: <http://bimerr.iot.linkeddata.es/def/building#> .
+@base <http://bimerr.iot.linkeddata.es/def/renovation-measures> .
+
+<http://bimerr.iot.linkeddata.es/def/renovation-measures> rdf:type owl:Ontology ;
+                                                           <http://purl.org/dc/elements/1.1/creator> "Serge Chávez Feria" ;
+                                                           <http://purl.org/dc/elements/1.1/publisher> "http://www.oeg-upm.net/" ;
+                                                           <http://purl.org/dc/elements/1.1/title> "Renovation Measures Ontology"@en ;
+                                                           dcterms:license "http://purl.org/NET/rdflicense/cc-by4.0" ;
+                                                           rdfs:comment "This ontology aims to model the Renovation Measure domain."@en ;
+                                                           owl:versionInfo "0.0.1"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/publisher
+<http://purl.org/dc/elements/1.1/publisher> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+<http://purl.org/dc/elements/1.1/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+dcterms:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+dcterms:license rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://bimerr.iot.linkeddata.es/def/building#hasLayer
+building:hasLayer rdf:type owl:ObjectProperty ;
+                  rdfs:label "has layer"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#hasMaterialCombination
+building:hasMaterialCombination rdf:type owl:ObjectProperty ;
+                                rdfs:label "has material combination"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#includesMaterial
+building:includesMaterial rdf:type owl:ObjectProperty ;
+                          rdfs:label "includes material"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#hasContext
+rm:hasContext rdf:type owl:ObjectProperty ;
+              rdfs:label "has context"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#hasProject
+rm:hasProject rdf:type owl:ObjectProperty ;
+              rdfs:label "has project"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#hasScenario
+rm:hasScenario rdf:type owl:ObjectProperty ;
+               rdfs:label "has scenario"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#implementedBy
+rm:implementedBy rdf:type owl:ObjectProperty ;
+                 rdfs:label "implemented by"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://bimerr.iot.linkeddata.es/def/building#identifier
+building:identifier rdf:type owl:DatatypeProperty ;
+                    rdfs:label "building:identifier"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#name
+building:name rdf:type owl:DatatypeProperty ;
+              rdfs:label "building:name"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#percentage
+building:percentage rdf:type owl:DatatypeProperty ;
+                    rdfs:label "percentage"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#position
+building:position rdf:type owl:DatatypeProperty ;
+                  rdfs:label "position"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#thickness
+building:thickness rdf:type owl:DatatypeProperty ;
+                   rdfs:label "thickness"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#costValue
+rm:costValue rdf:type owl:DatatypeProperty ;
+             rdfs:label "cost value"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#identifier
+rm:identifier rdf:type owl:DatatypeProperty ;
+              rdfs:label "identifier"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#name
+rm:name rdf:type owl:DatatypeProperty ;
+        rdfs:label "name"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://bimerr.iot.linkeddata.es/def/building#Component
+building:Component rdf:type owl:Class ;
+                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty building:identifier ;
+                                     owl:someValuesFrom xsd:string
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty building:name ;
+                                     owl:someValuesFrom xsd:string
+                                   ] ;
+                   rdfs:label "Component"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#Construction
+building:Construction rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty building:hasLayer ;
+                                        owl:someValuesFrom building:Layer
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty building:identifier ;
+                                        owl:someValuesFrom xsd:string
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty building:name ;
+                                        owl:someValuesFrom xsd:string
+                                      ] ;
+                      rdfs:label "Construction"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#Layer
+building:Layer rdf:type owl:Class ;
+               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                 owl:onProperty building:hasMaterialCombination ;
+                                 owl:someValuesFrom building:MaterialCombination
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty building:identifier ;
+                                 owl:someValuesFrom xsd:string
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty building:position ;
+                                 owl:someValuesFrom xsd:integer
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty building:thickness ;
+                                 owl:someValuesFrom xsd:float
+                               ] ;
+               rdfs:label "Layer"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#Material
+building:Material rdf:type owl:Class ;
+                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                    owl:onProperty building:identifier ;
+                                    owl:someValuesFrom xsd:string
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty building:name ;
+                                    owl:someValuesFrom xsd:string
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty building:percentage ;
+                                    owl:someValuesFrom xsd:float
+                                  ] ;
+                  rdfs:label "Material"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/building#MaterialCombination
+building:MaterialCombination rdf:type owl:Class ;
+                             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                               owl:onProperty building:includesMaterial ;
+                                               owl:someValuesFrom building:Material
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty building:identifier ;
+                                               owl:someValuesFrom xsd:string
+                                             ] ;
+                             rdfs:comment "Combination of materials in a layer."@en ;
+                             rdfs:label "Material Combination"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/key-performance-indicator#Project
+kpi:Project rdf:type owl:Class ;
+            rdfs:label "Project"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/key-performance-indicator#Scenario
+kpi:Scenario rdf:type owl:Class ;
+             rdfs:label "Scenario"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#ActiveMeasure
+rm:ActiveMeasure rdf:type owl:Class ;
+                 rdfs:subClassOf rm:RenovationMeasure ;
+                 rdfs:label "Active Measure"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#BasementCeiling
+rm:BasementCeiling rdf:type owl:Class ;
+                   rdfs:subClassOf rm:PassiveMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#CentralHeatingSystemAndHotWaterProduction
+rm:CentralHeatingSystemAndHotWaterProduction rdf:type owl:Class ;
+                                             rdfs:subClassOf rm:ActiveMeasure ;
+                                             rdfs:label "Central Heating System and Hot Water Production"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#CoolingSystem
+rm:CoolingSystem rdf:type owl:Class ;
+                 rdfs:subClassOf rm:ActiveMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Cost
+rm:Cost rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty rm:hasContext ;
+                          owl:someValuesFrom [ rdf:type owl:Class ;
+                                               owl:unionOf ( building:Component
+                                                             building:Material
+                                                           )
+                                             ]
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty rm:hasProject ;
+                          owl:someValuesFrom kpi:Project
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty rm:hasScenario ;
+                          owl:someValuesFrom kpi:Scenario
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty rm:costValue ;
+                          owl:someValuesFrom xsd:float
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty rm:identifier ;
+                          owl:someValuesFrom xsd:string
+                        ] ;
+        rdfs:label "Cost"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Lighting
+rm:Lighting rdf:type owl:Class ;
+            rdfs:subClassOf rm:ActiveMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#OuterWall
+rm:OuterWall rdf:type owl:Class ;
+             rdfs:subClassOf rm:PassiveMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#PV
+rm:PV rdf:type owl:Class ;
+      rdfs:subClassOf rm:RenewableMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#PassiveMeasure
+rm:PassiveMeasure rdf:type owl:Class ;
+                  rdfs:subClassOf rm:RenovationMeasure ;
+                  rdfs:label "Passive Measure"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#RenewableMeasure
+rm:RenewableMeasure rdf:type owl:Class ;
+                    rdfs:subClassOf rm:RenovationMeasure ;
+                    rdfs:label "Renewable Measure"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#RenovationMeasure
+rm:RenovationMeasure rdf:type owl:Class ;
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty rm:implementedBy ;
+                                       owl:someValuesFrom [ rdf:type owl:Class ;
+                                                            owl:unionOf ( building:Component
+                                                                          building:Construction
+                                                                        )
+                                                          ]
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty rm:identifier ;
+                                       owl:someValuesFrom xsd:string
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty rm:name ;
+                                       owl:someValuesFrom xsd:string
+                                     ] ;
+                     rdfs:label "Renovation Measure"@en .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Roof
+rm:Roof rdf:type owl:Class ;
+        rdfs:subClassOf rm:PassiveMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#SolarThermal
+rm:SolarThermal rdf:type owl:Class ;
+                rdfs:subClassOf rm:RenewableMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#UppermostCeiling
+rm:UppermostCeiling rdf:type owl:Class ;
+                    rdfs:subClassOf rm:PassiveMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#VentilationSystem
+rm:VentilationSystem rdf:type owl:Class ;
+                     rdfs:subClassOf rm:ActiveMeasure .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Window
+rm:Window rdf:type owl:Class ;
+          rdfs:subClassOf rm:PassiveMeasure .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#ADPE
+rm:ADPE rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#ADPF
+rm:ADPF rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#AP
+rm:AP rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Active
+rm:Active rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#BasementCeiling
+rm:BasementCeiling rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#CentralHeatingSystem
+rm:CentralHeatingSystem rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#CoolingSystem
+rm:CoolingSystem rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Door
+rm:Door rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#EP
+rm:EP rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#GWP100a
+rm:GWP100a rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Lighting
+rm:Lighting rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#ODP
+rm:ODP rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#OuterWall
+rm:OuterWall rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#POCP
+rm:POCP rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#PV
+rm:PV rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Passive
+rm:Passive rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Renewable
+rm:Renewable rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Roof
+rm:Roof rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#SolarThermal
+rm:SolarThermal rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#UppermostCeiling
+rm:UppermostCeiling rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#VentilationSystem
+rm:VentilationSystem rdf:type owl:NamedIndividual .
+
+
+###  http://bimerr.iot.linkeddata.es/def/renovation-measures#Window
+rm:Window rdf:type owl:NamedIndividual .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+rm:BasementCeiling rdfs:label "Basement Ceiling"@en .
+
+
+rm:CoolingSystem rdfs:label "Cooling System"@en .
+
+
+rm:Lighting rdfs:label "Lighting"@en .
+
+
+rm:OuterWall rdfs:label "Outter Wall"@en .
+
+
+rm:PV rdfs:label "PV"@en .
+
+
+rm:Roof rdfs:label "Roof"@en .
+
+
+rm:SolarThermal rdfs:label "Solar Thermal"@en .
+
+
+rm:UppermostCeiling rdfs:label "Uppermost Ceiling"@en .
+
+
+rm:VentilationSystem rdfs:label "Ventilation System"@en .
+
+
+rm:Window rdfs:label "Window"@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( rm:Active
+                        rm:Passive
+                        rm:Renewable
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( rm:BasementCeiling
+                        rm:CentralHeatingSystem
+                        rm:CoolingSystem
+                        rm:Door
+                        rm:Lighting
+                        rm:OuterWall
+                        rm:PV
+                        rm:Roof
+                        rm:SolarThermal
+                        rm:UppermostCeiling
+                        rm:VentilationSystem
+                        rm:Window
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
